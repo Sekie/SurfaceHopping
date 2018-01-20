@@ -57,10 +57,16 @@ std::vector<double> CalcForce(double x, double TimeStep, std::string Case)
 	Eigen::MatrixXd VMinusDX = Potential(x - dx, Case);
 	
 	double tmpDouble;
-	tmpDouble = -1 * (VPlusDX(0, 0) - VMinusDX(0, 0)) / (2 * dx);
-	F.push_back(tmpDouble);
-	tmpDouble = -1 * (VPlusDX(1, 1) - VMinusDX(1, 1)) / (2 * dx);
-	F.push_back(tmpDouble);
+	for (int i = 0; i < VPlusDX.rows(); i++)
+	{
+		tmpDouble = -1 * (VPlusDX(i, i) - VMinusDX(i, i)) / (2 * dx);
+		F.push_back(tmpDouble);
+	}
 
 	return F;
+}
+
+void MDStep(double &x, double &p, double TimeStep, int Surface, std::string Case)
+{
+
 }

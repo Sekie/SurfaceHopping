@@ -8,12 +8,20 @@
 #include <fstream>
 #include <map>
 #include <string>
+#include "Input.h"
 
-int Init()
+void InputObj::Init()
 {
-	std::string Case;
 	std::cout << "Enter case (A / B / C / D):" << std::endl;
 	std::cin >> Case;
-
-	return 0;
+	std::cout << "Enter time step:" << std::endl;
+	std::cin >> TimeStep;
+	std::cout << "Enter initial momentum: " << std::endl;
+	std::cin >> Momentum;
+	std::cout << "Enter initial position: " << std::endl;
+	std::cin >> Position;
+	std::cout << "Enter number of steps in the dynamics:" << std::endl;
+	std::cin >> NumSteps;
+	std::cout << "Enter number of walkers:" << std::endl;
+	std::cin >> NumWalkers;
 }

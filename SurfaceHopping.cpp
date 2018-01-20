@@ -9,6 +9,7 @@
 #include <Eigen/Sparse>
 #include <Eigen/Eigenvalues>
 #include <complex>
+#include "Input.h"
 
 #define HBAR 1.0
 
@@ -70,4 +71,31 @@ int SurfaceHopping(std::string Case, int NumWalkers)
 	}
 
 	return 0;
+}
+
+int main()
+{
+	return 0;
+	InputObj InitParam;
+	InitParam.Init();
+
+	/***** STEP 1 *****/
+	/* The initial values are set including the momentum and density matrix */
+	Eigen::MatrixXcd a = Eigen::MatrixXcd::Zero(InitParam.NumSurfaces, InitParam.NumSurfaces); // This is the density matrix.
+	a(0, 0) = 1; // Initialize the density matrix so that initially, only the first state is populated.
+
+	Eigen::MatrixXd b = Eigen::MatrixXd::Zero(InitParam.NumSurfaces, InitParam.NumSurfaces); // b Matrix that controls transition probabilities.
+
+	/***** STEP 2 *****/
+	/* Classical molecular dynamics is ran for each walker */
+	for (int Walker = 0; Walker < InitParam.NumWalkers; Walker++) // Loops over each walker
+	{
+		int CurrentSurface = 0; // Which PES the walker is on.
+		double Position = InitParam.Position; // Current position of the walker.
+		double Momentum = InitParam.Momentum; // Current momentum of the walker;
+		for (int Step = 0; Step < InitParam.NumSteps; Step++)
+		{
+
+		}
+	}
 }
