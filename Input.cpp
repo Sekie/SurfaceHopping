@@ -14,6 +14,8 @@ void InputObj::Init()
 {
 	std::cout << "Enter case (A / B / C / D):" << std::endl;
 	std::cin >> Case;
+	std::cout << "Enter mass:" << std::endl;
+	std::cin >> Mass;
 	std::cout << "Enter time step:" << std::endl;
 	std::cin >> TimeStep;
 	std::cout << "Enter initial momentum: " << std::endl;

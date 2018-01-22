@@ -73,7 +73,7 @@ int SurfaceHopping(std::string Case, int NumWalkers)
 	return 0;
 }
 
-int main()
+int main_beta()
 {
 	return 0;
 	InputObj InitParam;

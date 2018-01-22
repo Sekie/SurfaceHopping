@@ -11,6 +11,7 @@ public:
 	double TimeStep;
 	double Momentum;
 	double Position;
+	double Mass;
 	std::string Case;
 	void Init();
 };
