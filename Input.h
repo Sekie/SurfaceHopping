@@ -14,4 +14,6 @@ public:
 	double Mass;
 	std::string Case;
 	void Init();
+	std::string OutputName;
+	void Default();
 };

@@ -14,6 +14,8 @@ void InputObj::Init()
 {
 	std::cout << "Enter case (A / B / C / D):" << std::endl;
 	std::cin >> Case;
+	std::cout << "Enter output filename:" << std::endl;
+	std::cin >> OutputName;
 	std::cout << "Enter mass:" << std::endl;
 	std::cin >> Mass;
 	std::cout << "Enter time step:" << std::endl;
@@ -26,4 +28,16 @@ void InputObj::Init()
 	std::cin >> NumSteps;
 	std::cout << "Enter number of walkers:" << std::endl;
 	std::cin >> NumWalkers;
+}
+
+void InputObj::Default()
+{
+	Case = "A";
+	OutputName = "out.txt";
+	Mass = 1.0;
+	TimeStep = 0.1;
+	Momentum = 0.01;
+	Position = -1;
+	NumSteps = 10000;
+	NumWalkers = 10;
 }
