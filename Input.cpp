@@ -35,9 +35,9 @@ void InputObj::Default()
 	Case = "A";
 	OutputName = "out.txt";
 	Mass = 2000;
-	TimeStep = 0.1;
-	Momentum = 10;
+	TimeStep = 1;
+	Momentum = 1;
 	Position = -10;
-	NumSteps = 2000;
-	NumWalkers = 100;
+	NumSteps = 100000;
+	NumWalkers = 1000;
 }

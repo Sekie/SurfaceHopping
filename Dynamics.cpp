@@ -44,6 +44,20 @@ Eigen::MatrixXd Potential(double x, std::string Case)
 		V(0, 1) = tmpDouble;
 		V(1, 0) = tmpDouble;
 	}
+	if (Case == "B")
+	{
+		V = Eigen::MatrixXd::Zero(2, 2);
+		double A = 0.10;
+		double B = 0.28;
+		double C = 0.015;
+		double D = 0.06;
+		double E0 = 0.05;
+
+		V(0, 0) = 0;
+		V(1, 1) = -1 * A * std::exp(-1 * B * x * x) + E0;
+		V(0, 1) = C * std::exp(-1 * D * x * x);
+		V(1, 0) = V(0, 1);
+	}
 	if (Case == "HO")
 	{
 		V = Eigen::MatrixXd::Zero(2, 2);

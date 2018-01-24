@@ -61,7 +61,7 @@ std::vector<int> SurfaceHopping(InputObj InitParam)
 	// Vector for output. The elements are, in order, reflectance on 0, transmission on 0, reflectance on 1, transmission on 1;
 	// This vector counts the number of time each case happens.
 	std::vector<int> CountOutcomes;
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < InitParam.NumSurfaces * 2; i++)
 	{
 		CountOutcomes.push_back(0); // Initialize
 	}
@@ -169,6 +169,7 @@ std::vector<int> SurfaceHopping(InputObj InitParam)
 			}
 		}
 		std::cout << "final x = " << Position << std::endl;
+		std::cout << InitParam.Position << std::endl;
 	}
 
 	return CountOutcomes;
@@ -181,6 +182,8 @@ int main()
 
 	srand(0); // Seed for RNG.
 	std::ofstream Output(Param.OutputName.c_str());
+	std::ofstream OutA("A.txt");
+	std::ofstream OutB("B.txt");
 
 	std::vector<int> tmpVecInt;
 
@@ -188,12 +191,25 @@ int main()
 	{
 		Param.Momentum = (double)p;
 		tmpVecInt = SurfaceHopping(Param);
-		Output << p << "\t";
+		OutA << p << "\t";
 		for (int i = 0; i < tmpVecInt.size(); i++)
 		{
-			Output << tmpVecInt[i] << "\t";
+			OutA << tmpVecInt[i] << "\t";
 		}
-		Output << std::endl;
+		OutA << std::endl;
+	}
+
+	Param.Case = "B";
+	for (int i = 0; i < 50; i++)
+	{
+		Param.Momentum = std::sqrt(2 * Param.Mass * std::exp((double)i * 0.1 - 4));
+		tmpVecInt = SurfaceHopping(Param);
+		OutB << (double)i * 0.1 - 4 << "\t";
+		for (int i = 0; i < tmpVecInt.size(); i++)
+		{
+			OutB << tmpVecInt[i] << "\t";
+		}
+		OutB << std::endl;
 	}
 
 	return 0;
