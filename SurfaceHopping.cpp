@@ -56,15 +56,15 @@ int SurfaceHopping(std::string Case, int NumWalkers)
 	return 0;
 }
 
-int main()
+std::vector<int> SurfaceHopping(InputObj InitParam)
 {
-	InputObj InitParam;
-	// InitParam.Init();
-	InitParam.Default();
-
-	std::ofstream Output(InitParam.OutputName.c_str());
-
-	srand(0); // Seed for RNG.
+	// Vector for output. The elements are, in order, reflectance on 0, transmission on 0, reflectance on 1, transmission on 1;
+	// This vector counts the number of time each case happens.
+	std::vector<int> CountOutcomes;
+	for (int i = 0; i < 4; i++)
+	{
+		CountOutcomes.push_back(0); // Initialize
+	}
 
 	/* Classical molecular dynamics is ran for each walker, with hopping considered after each step. */
 	for (int Walker = 0; Walker < InitParam.NumWalkers; Walker++) // Loops over each walker
@@ -154,8 +154,47 @@ int main()
 					Velocity = Velocity + (sqrt(2 * InitParam.Mass * fabs(ChangeInEnergy)) * Velocity / fabs(Velocity));
 				}
 			}
+
+			// If we reach the initial position, or made it across the crossing, we can stop, and add to the counter.
+			// These conditions only work if we are considering negative position and positive momentum.
+			if (Position < InitParam.Position) // Means reflectance
+			{
+				CountOutcomes[CurrentSurface * 2]++;
+				break;
+			}
+			if (Position > -1 * InitParam.Position) // Means transmission
+			{
+				CountOutcomes[CurrentSurface * 2 + 1]++;
+				break;
+			}
 		}
+		std::cout << "final x = " << Position << std::endl;
 	}
-	system("pause");
+
+	return CountOutcomes;
+}
+
+int main()
+{
+	InputObj Param;
+	Param.Default();
+
+	srand(0); // Seed for RNG.
+	std::ofstream Output(Param.OutputName.c_str());
+
+	std::vector<int> tmpVecInt;
+
+	for (int p = 1; p < 30; p++)
+	{
+		Param.Momentum = (double)p;
+		tmpVecInt = SurfaceHopping(Param);
+		Output << p << "\t";
+		for (int i = 0; i < tmpVecInt.size(); i++)
+		{
+			Output << tmpVecInt[i] << "\t";
+		}
+		Output << std::endl;
+	}
+
 	return 0;
 }

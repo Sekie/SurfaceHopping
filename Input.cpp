@@ -34,10 +34,10 @@ void InputObj::Default()
 {
 	Case = "A";
 	OutputName = "out.txt";
-	Mass = 1.0;
+	Mass = 2000;
 	TimeStep = 0.1;
-	Momentum = 0.01;
-	Position = -1;
-	NumSteps = 10000;
-	NumWalkers = 10;
+	Momentum = 10;
+	Position = -10;
+	NumSteps = 2000;
+	NumWalkers = 100;
 }
